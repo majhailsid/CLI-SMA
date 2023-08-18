@@ -3,17 +3,35 @@ console.log(`Github : @majhailsid | LinkedIn : @majhail | Twitter : Yxshdeep_sin
 
 let operateVal = prompt("Select what operation you want to operate : \n 1. Add new Item \n 2. Delete Existing Item \n 3. Update Existing Item \n 4. Exit \n");
 
-switch (operateVal) {
-  case "1":
+// switch (operateVal) {
+//   case "1":
+//     console.log("ADD NEW ITEM :\n");
+//     break;
+//   case "2":
+//     console.log("DELETE EXISTING ITEM :\n");
+//     break;
+//   case "3":
+//     console.log("UPDATE EXISTING ITEM :\n");
+//     break;
+//   case "4":
+//     console.log("EXIT");
+//     break;
+// }
+
+
+if(operateVal <= 0 || operateVal > 4){
+  console.log("Please select a valid option :\n")
+}else{
+  if(operateVal == 1){
     console.log("ADD NEW ITEM :\n");
-    break;
-  case "2":
-    console.log("DELETE EXISTING ITEM :\n");
-    break;
-  case "3":
-    console.log("UPDATE EXISTING ITEM :\n");
-    break;
-  case "4":
-    console.log("EXIT");
-    break;
+  }else{
+    if(operateVal == 2){
+      console.log("DELETE EXISTING ITEM :\n");
+    }else{
+      if(operateVal == 3){
+        console.log("UPDATE EXISTING ITEM :\n");
+      }
+    }
+  }
+  console.log("Exiting...")
 }
