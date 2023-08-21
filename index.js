@@ -13,32 +13,61 @@ let productDataBase = {
   showProductDetailsById: function(idNumber) {
     if(this.productId.length == 0){
       console.log('There is no product to show! Please Add one!')
-    }else{ let id = Number.parseInt(idNumber);
-    for (let item=0; item < this.productId.length; item++) {
+    }
+    else{ let id = Number.parseInt(idNumber);
+    this.productId.forEach((item) => {
       if (this.productId[item] === id) {
         console.log(`\n\tDetails of ${this.productName[item]}\n\n\tProduct Id : ${id}\n\tProduct Name : ${this.productName[item]}\n\tPrice : ${this.productPrice[item]}\n\tQuantity Present(Current) : ${this.productPresentQuantity[item]}\n\tDetails : ${this.productDetails[item]}\n`)
       }
-    }}
+    })}
   },
   showProductDetailsByName : function(pName){
     if(this.productId.length == 0){
       console.log('There is no product to show! Please Add one!')
     }else{let pName_string = pName.toString();
-    for (let name=0; name < this.productId.length; name++){
+    this.productId.forEach((name)=>{
       if(this.productName[name] === pName_string){
         console.log(`\n\tDetails of ${this.productName[name]}\n\n\tProduct Id : ${name}\n\tProduct Name : ${this.productName[name]}\n\tPrice : ${this.productPrice[name]}\n\tQuantity Present(Current) : ${this.productPresentQuantity[name]}\n\tDetails : ${this.productDetails[name]}\n`)
       }
-    }}
+    })}
   },
   addNewProduct : function(){
-    let storeNewProductName = prompt("\t\nProduct Name :");
-    let storeNewProductPrice = Number.parseInt(prompt("\tPrice : "));
-    let storeNewProductPresentQuantity = Number.parseInt(prompt("\tPresent Quantity(Current) : "));
-    let storeProductDetails = prompt("\tDetails : ");
-  }
-}
+   let storeNewProductName = prompt("\nName :");
+    function checkName(){
+      let statusN = productDataBase.productName.indexOf(storeNewProductName);
+      if(statusN >= 0){
+        console.log('\n\tThe item you are trying to add, already exists!!')
+        return true;
+      }else{
+        if(statusN < 0){
+          let baseId = productDataBase.productId.length;
+          let storeProductPrice = Number.parseInt(prompt("\nPrice : "))
+          let storeProductQuantity = Number.parseInt(prompt("\nPresent Quantity (Current) : "))
+          let storeProductDetails = prompt("\nDescription :")
+          let storeProductId = baseId + 1;
+          productDataBase.productName.push(storeNewProductName);
+          productDataBase.productPrice.push(storeProductPrice);
+          productDataBase.productPresentQuantity.push(storeProductQuantity);
+          productDataBase.productDetails.push(storeProductDetails);
+          productDataBase.productId.push(storeProductId);
 
-productDataBase.addNewProduct();
+          console.log("\n\n")
+          console.log(`Added new product to the DataBase :\n\n\tID : ${storeProductId}\n\tName : ${storeNewProductName}\n\tPrice : ${storeProductPrice}\n\tPresent Quantity (Current) : ${storeProductQuantity}\n\tDescription : ${storeProductDetails}\n\n`)
+          
+          console.log(productDataBase.productId);
+          console.log(productDataBase.productName);
+          console.log(productDataBase.productPrice);
+          console.log(productDataBase.productPresentQuantity);
+          console.log(productDataBase.productDetails);
+          return false;
+        }
+      }
+    };
+    checkName();
+  }
+};
+
+productDataBase.addNewProduct()
 // if(operateVal <= 0 || operateVal > 4){
 //   console.log("Please select a valid option :\n")
 // }else{
