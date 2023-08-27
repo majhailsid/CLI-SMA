@@ -102,55 +102,100 @@ let productDataBase = {
 					}
 				}
 			}
-      confirmConsent();
+			confirmConsent();
 		}
 	},
-  deleteProductByName : function(){
-    if (this.productId.length == 0) {
+	deleteProductByName: function() {
+		if (this.productId.length == 0) {
 			console.log('There is no product to show! Please Add one!')
 		} else {
 			let storeNameInput = prompt("\n\tEnter Name of the Product to deleted : ");
-      function checkProductExistence() {
-			let statusN = productDataBase.productName.indexOf(storeNameInput);
-			if (statusN < 0) {
-				console.log('\n\tThe item you are trying to delete, doesn\'t exists!!')
-				return true;
-			} else{
-    	let confirmConsent = () => {
-				let consent = prompt(`\nAre you sure you want to delete ${storeNameInput} (Y/N) (Default YES) : `)
-				if (consent === "Y" || consent === "y") {
-					let storeDelName = productDataBase.productName[statusN];
-					let storeDelPrice = productDataBase.productPrice[statusN];
-					let storeDelQuantity = productDataBase.productPresentQuantity[statusN];
-					let storeDelDetails = productDataBase.productDetails[statusN];
 
-					productDataBase.productId.splice(statusN, 1);
-					productDataBase.productName.splice(statusN, 1);
-					productDataBase.productPrice.splice(statusN, 1);
-					productDataBase.productPresentQuantity.splice(statusN, 1);
-					productDataBase.productDetails.splice(statusN, 1);
-
-					console.log("\n\n")
-					console.log(`Deleted a product from DataBase :\n\n\tID : ${statusN}\n\tName : ${storeDelName}\n\tPrice : ${storeDelPrice}\n\tPresent Quantity (Current) : ${storeDelQuantity}\n\tDescription : ${storeDelDetails}\n\n`)
-
-					console.log("\n\n\tDeletion Successfull !!")
+			function checkProductExistence() {
+				let statusN = productDataBase.productName.indexOf(storeNameInput);
+				if (statusN < 0) {
+					console.log('\n\tThe item you are trying to delete, doesn\'t exists!!')
+					return true;
 				} else {
-					if (consent == "N" || consent == "n") {
-						console.log(`Deletion of ${storeNameInput} cancelled !\nExiting...`)
-					} else {
-						console.log("Please select a valid option, either Y(YES) or N(NO)!")
-						confirmConsent();
+					let confirmConsent = () => {
+						let consent = prompt(`\nAre you sure you want to delete ${storeNameInput} (Y/N) (Default YES) : `)
+						if (consent === "Y" || consent === "y") {
+							let storeDelName = productDataBase.productName[statusN];
+							let storeDelPrice = productDataBase.productPrice[statusN];
+							let storeDelQuantity = productDataBase.productPresentQuantity[statusN];
+							let storeDelDetails = productDataBase.productDetails[statusN];
+
+							productDataBase.productId.splice(statusN, 1);
+							productDataBase.productName.splice(statusN, 1);
+							productDataBase.productPrice.splice(statusN, 1);
+							productDataBase.productPresentQuantity.splice(statusN, 1);
+							productDataBase.productDetails.splice(statusN, 1);
+
+							console.log("\n\n")
+							console.log(`Deleted a product from DataBase :\n\n\tID : ${statusN}\n\tName : ${storeDelName}\n\tPrice : ${storeDelPrice}\n\tPresent Quantity (Current) : ${storeDelQuantity}\n\tDescription : ${storeDelDetails}\n\n`)
+
+							console.log("\n\n\tDeletion Successfull !!")
+						} else {
+							if (consent == "N" || consent == "n") {
+								console.log(`Deletion of ${storeNameInput} cancelled !\nExiting...`)
+							} else {
+								console.log("Please select a valid option, either Y(YES) or N(NO)!")
+								confirmConsent();
+							}
+						}
 					}
+					confirmConsent();
 				}
 			}
-        confirmConsent();
+			checkProductExistence();
+		}
+	},
+  updateProductById : function(){
+    if (this.productId.length == 0) {
+			console.log('There is no product to show! Please Add one!')
+		}else{
+      let index = Number.parseInt(prompt("\n\tEnter Id of Product to Update : "))
+			let storeIndex = productDataBase.productId.indexOf(index);
+
+      let storeUpdateName = productDataBase.productName[storeIndex];
+      let storeUpdatePrice = productDataBase.productPrice[storeIndex];
+      let storeUpdateQuantity = productDataBase.productPresentQuantity[storeIndex];
+      let storeUpdateDetails = productDataBase.productDetails[storeIndex];
+
+      console.log("\n\n\tDetails of product before update :\n");
+      console.log(`\tName : ${storeUpdateName}`);
+      console.log(`\tPrice : ${storeUpdatePrice}`);
+      console.log(`\tQuantity : ${storeUpdateQuantity}`);
+      console.log(`\tDetails : ${storeUpdateDetails}\n`);
+      
+      function updateDetails(){
+        let promptUpdateName = prompt("Name : ")
+        let promptUpdatePrice = Number.parseInt(prompt("Price : "))
+        let promptUpdateQuantity = prompt("Quantity : ")
+        let promptUpdateDetails = prompt("Description : ")
+
+        function setUpdateVal(){
+          productDataBase.productName[index] = promptUpdateName;
+          productDataBase.productPrice[index] = promptUpdatePrice;
+          productDataBase.productPresentQuantity[index] = promptUpdateQuantity;
+          productDataBase.productDetails[index] = promptUpdateDetails;
+
+          console.log("\n\n\tDetails of product after update :\n");
+          console.log(`\tName : ${promptUpdateName}`);
+          console.log(`\tPrice : ${promptUpdatePrice}`);
+          console.log(`\tQuantity : ${promptUpdateQuantity}`);
+          console.log(`\tDetails : ${promptUpdateDetails}\n`);
+        }
+        setUpdateVal();
       }
-    }
-      checkProductExistence();
+      updateDetails();
+    };
+  },
+  updateProductByName : function(){
+    
   }
 }
-}
-productDataBase.deleteProductByName();
+productDataBase.updateProductById();
 // if(operateVal <= 0 || operateVal > 4){
 //   console.log("Please select a valid option :\n")
 // }else{
